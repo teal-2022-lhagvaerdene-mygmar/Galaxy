@@ -1,0 +1,15 @@
+.card-header{
+    display: flex;
+    margin-left: 200px;
+    margin-right: 200px;
+    gap: 20px;
+    color: white;
+    background-color:none;
+}
+body{
+    background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfiVLtH7g0pCByfNBL9KGShuW_yR53WI44Mw&usqp=CAU') ;
+    
+}
+h1{
+    font-size: 100px;
+}
