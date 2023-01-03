@@ -1,11 +1,25 @@
-.card-header{
-    display: flex;
-    margin-left: 200px;
-    margin-right: 200px;
-    gap: 20px;
-    color: white;
-    background-color:none;
-}
 h1{
-    font-size: 100px;
+    color: black;
+    font-size: 40px;
+}
+.card-new{
+    display: flex;
+    gap: 300px;
+    margin-top: 50px;
+    align-items: center;
+}
+.card-header{
+    position: absolute;
+    left: 700px;
+}
+.card-div{
+    display: flex;
+    border: 1px solid black;
+    margin-top: 30px;
+    width: 500px;
+    padding: 10px;
+}
+.card-b{
+    position: absolute;
+    left: 400px;
 }

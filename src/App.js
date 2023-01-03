@@ -1,15 +1,17 @@
-import './App.css';
-import Header from './header.js';
-import Section from './section';
+import "./App.css";
+import Header from "./header.js";
+import CollapsibleExample from "./navbar";
+import Section from "./section";
 
 function App() {
   return (
+    <>
+      <CollapsibleExample />
       <div>
-        <h1>Galaxies </h1>
-          <Header/>
-          <Section/>
+        <Header />
       </div>
-  )
+    </>
+  );
 }
 
 export default App;
