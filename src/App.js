@@ -1,12 +1,12 @@
 import "./App.css";
 import Header from "./header.js";
 import CollapsibleExample from "./navbar";
-import Section from "./section";
 
 function App() {
   return (
     <>
       <CollapsibleExample />
+      <h1 className="container">World sports news</h1>
       <div>
         <Header />
       </div>
