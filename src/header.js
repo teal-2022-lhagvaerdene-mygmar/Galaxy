@@ -6,7 +6,7 @@ function Header() {
       {medee.map((niitlel) => (
         <div
           key={niitlel.id}
-          className=" container border 2 mb-5"
+          className=" container border mb-5"
           id={niitlel.id}
         >
           <div className="d-flex justify-content-between ">
