@@ -12,7 +12,7 @@ function Header() {
           <div className="d-flex justify-content-between ">
             <h1>{niitlel.name}</h1>
             <div>
-              <button className="btn btn-primary ">edit</button>
+              <button className="btn btn-primary " onClick={editing}>edit</button>
               <button className="btn btn-danger ">delete</button>
             </div>
           </div>

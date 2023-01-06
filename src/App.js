@@ -1,4 +1,5 @@
 import "./App.css";
+import { Editing } from "./editing/editing";
 import Header from "./header.js";
 import UncontrolledExample from "./imageslider";
 import CollapsibleExample from "./navbar";
@@ -15,6 +16,7 @@ function App() {
       <div>
         <Header />
       </div>
+      <Editing />
     </>
   );
 }
