@@ -1,6 +1,12 @@
 import { medee } from "./data";
 import "./header.css";
 function Header() {
+  function editDeleting(where) {
+    if (window.confirm("ustgahuu ")) {
+      const medee1 = medee;
+      medee1.splice(where, 1);
+    }
+  }
   return (
     <div id="hi" className="mt-3">
       {medee.map((niitlel) => (
@@ -12,12 +18,17 @@ function Header() {
           <div className="d-flex justify-content-between ">
             <h1>{niitlel.name}</h1>
             <div>
-              <button className="btn btn-primary " onClick={editing}>edit</button>
-              <button className="btn btn-danger ">delete</button>
+              <button className="btn btn-primary ">edit</button>
+              <button
+                className="btn btn-danger "
+                onClick={() => editDeleting(niitlel.id)}
+              >
+                delete
+              </button>
             </div>
           </div>
           <div>
-            <img src={niitlel.src} alt="hi" width={1300} />
+            <img src={niitlel.src} alt="hi" />
             <p>{niitlel.title}</p>
           </div>
         </div>

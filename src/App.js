@@ -13,10 +13,10 @@ function App() {
         <UncontrolledExample />
       </div>
       <h1 className="container head">World sports news</h1>
+      <Editing />
       <div>
         <Header />
       </div>
-      <Editing />
     </>
   );
 }

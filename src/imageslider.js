@@ -4,24 +4,14 @@ function UncontrolledExample() {
   return (
     <Carousel>
       <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="donovan.webp"
-          alt="First slide"
-          height={1100}
-        />
+        <img className="d-block w-100" src="donovan.webp" alt="First slide" />
         <Carousel.Caption>
           <h3>Basketball</h3>
           <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="za.jpeg"
-          alt="Second slide"
-          height={1100}
-        />
+        <img className="d-block w-100" src="favicon.jpeg" alt="Second slide" />
 
         <Carousel.Caption>
           <h3> Football</h3>
@@ -29,12 +19,7 @@ function UncontrolledExample() {
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="776713.jpeg"
-          height={1100}
-          alt="Third slide"
-        />
+        <img className="d-block w-100" src="776713.jpeg" alt="Third slide" />
 
         <Carousel.Caption>
           <h3>Car race</h3>

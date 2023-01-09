@@ -3,7 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, NavLink } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 function CollapsibleExample() {
   return (
@@ -24,7 +24,7 @@ function CollapsibleExample() {
             <Nav.Link href="#action/3.4">Sedev</Nav.Link>
           </Nav>
           <Nav>
-            <Button variant="light">Exist</Button>{" "}
+            <Button variant="light">Exit</Button>{" "}
           </Nav>
         </Navbar.Collapse>
       </Container>
