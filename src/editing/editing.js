@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { EditingClose } from "./editingClose";
 
-export function Editing() {
+export function Editing({ onSave }) {
   const [editing, setEditing] = useState(false);
 
   function close() {
@@ -14,7 +14,7 @@ export function Editing() {
         <button className="btn btn-primary" onClick={() => setEditing(true)}>
           new
         </button>
-        <EditingClose show={editing} onClose={close} />
+        <EditingClose show={editing} onClose={close} onSave={onSave} />
       </div>
     </div>
   );

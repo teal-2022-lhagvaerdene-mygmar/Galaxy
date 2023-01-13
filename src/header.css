@@ -29,3 +29,9 @@ font-size: 23px;
 img{
     width: 100%;
 }
+.card-new{
+    display: flex;
+    border: 2px solid black;
+    justify-content: space-between;
+    padding: 10px;
+}
