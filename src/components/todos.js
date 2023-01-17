@@ -2,8 +2,9 @@ import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 import "./App.css";
 import UncontrolledExample from "./imageslider";
-import CollapsibleExample from "./navbar";
-import { Editing } from "./editing/editing";
+
+import { Editing } from "./editing";
+import Header from "./header";
 
 function Todos() {
   const [save, setSave] = useState([]);
@@ -30,7 +31,6 @@ function Todos() {
   }
   return (
     <>
-      <CollapsibleExample />å
       <div>
         <UncontrolledExample />
       </div>

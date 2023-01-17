@@ -1,12 +1,16 @@
-import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import Todos from "./components/todos";
-
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Admin } from "./components/admin/admin";
+import { Client } from "./components/client/client";
 function App() {
   return (
-    <>
-      <Todos />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/admin/*" element={<Admin />} />
+        <Route path="*" element={<Client />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
