@@ -1,7 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 import "./App.css";
-import UncontrolledExample from "./imageslider";
 
 import { Editing } from "./editing";
 import Header from "./header";
@@ -31,9 +30,6 @@ function Todos() {
   }
   return (
     <>
-      <div>
-        <UncontrolledExample />
-      </div>
       <Editing onSave={handleSave} />
       <div>
         {save.map((niitlel, index) => {
