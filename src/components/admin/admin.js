@@ -28,21 +28,20 @@ function AdminNavbar() {
     <Navbar expand="lg" bg="dark" variant="dark">
       <Container>
         <Navbar.Brand>
-          <Nav.Link to={"/"} as={Link}>
+          <Nav.Link to="/" as={Link}>
             Home
           </Nav.Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link to={"/admin"} as={Link}>
+            <Nav.Link to="/admin" as={Link}>
               Admin
             </Nav.Link>
-            <Nav.Link to={"/admin/categories"} as={Link}>
+            <Nav.Link to="/admin/categories" as={Link}>
               Categories
             </Nav.Link>
-
-            <Nav.Link to={"/admin/todos"} as={Link}>
+            <Nav.Link to="/admin/todos" as={Link}>
               Todos
             </Nav.Link>
           </Nav>

@@ -3,9 +3,8 @@ import { Link, Route, Routes, useParams } from "react-router-dom";
 export function Client() {
   return (
     <div>
-      {" "}
-      <Link to="/">Home</Link> <Link to="/blog">Blog</Link>{" "}
-      <Link to="/signup">Sign up</Link>
+      <Link to="/">Home</Link> <Link to="/blog">Blog</Link>
+      <Link to="/admin">Admin</Link>
       <Routes>
         <Route path="/" element={<div>Home page</div>} />
         <Route path="/blog" element={<div>Blog list</div>} />
