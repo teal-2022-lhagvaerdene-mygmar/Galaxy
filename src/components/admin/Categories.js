@@ -1,24 +1,53 @@
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { CategoriesEdit } from "./categoriesEdit";
+import { CategoriesList } from "./CategoriesList";
+
+axios.interceptors.request.use((config) => {
+  console.log("Request sent to: ", config.url);
+  return config;
+});
+
 export function Categories() {
-  const [text, setText] = useState();
+  const [searchParams, setSearchParams] = useSearchParams({});
+
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    // fetch("https://dummyjson.com/products")
+    //     .then((req) => req.json())
+    //     .then((data) => setList(data.products));
+
+    axios.get("https://dummyjson.com/products").then((res) => {
+      const { data, status } = res;
+      if (status === 200) {
+        setList(data.products);
+      } else {
+        alert(`Aldaa garlaa: ${status}`);
+      }
+    });
+  }, []);
+
+  function closeModal() {
+    setSearchParams({});
+  }
+
+  const editing = searchParams.get("editing") === "new";
 
   return (
-    <>
-      <CKEditor
-        editor={ClassicEditor}
-        data={text}
-        onChange={(event, editor) => {
-          const data = editor.getData();
-          setText(data);
-          // console.log({ event, editor, data });
-        }}
-      />
+    <div>
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h1>Ангилал</h1>
+        <button
+          className="btn btn-success"
+          onClick={() => setSearchParams({ editing: "new" })}>
+          Шинэ
+        </button>
+      </div>
 
-      <div>{text}</div>
-
-      <div dangerouslySetInnerHTML={{ __html: text }}></div>
-    </>
+      <CategoriesList list={list} />
+      <CategoriesEdit show={editing} onClose={closeModal} />
+    </div>
   );
 }

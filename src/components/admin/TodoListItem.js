@@ -1,7 +1,6 @@
 import { useState } from "react";
 
-import "./header.css";
-function Header({ niitlel, onUpdate, onDelete }) {
+export function TodoListItem({ niitlel, onUpdate, onDelete }) {
   const [editing, setEditing] = useState(false);
   const [done, setDone] = useState(false);
   function handleDoneToggle() {
@@ -30,7 +29,7 @@ function Header({ niitlel, onUpdate, onDelete }) {
     />
   );
 }
-export default Header;
+
 function EditimgItem({ onSave, onCancel, defaultValue }) {
   const [text, setText] = useState(defaultValue);
   return (
@@ -49,20 +48,17 @@ function EditimgItem({ onSave, onCancel, defaultValue }) {
     </div>
   );
 }
-function NormalItem({ niitlel, onEdit, onDelete }) {
+function NormalItem({ niitlel, onEdit, onDelete, done, onToggleDone }) {
   return (
-    <div className="card-new container">
-      <div>{niitlel.text}</div>
-      <div>
-        {!niitlel.done && (
-          <button className="btn btn-outline-warning" onClick={onEdit}>
-            edit
-          </button>
-        )}
-        <button className="btn btn-outline-danger" onClick={onDelete}>
-          delete
-        </button>
-      </div>
-    </div>
+    <li style={{ textDecoration: done ? "line-through" : "none" }}>
+      <input type="checkbox" checked={done} onChange={onToggleDone} />{" "}
+      {niitlel.text}
+      {!done && (
+        <>
+          <button onClick={onEdit}>Засах</button>
+        </>
+      )}
+      <button onClick={onDelete}>Устгах</button>
+    </li>
   );
 }

@@ -5,6 +5,8 @@ export function Client() {
     <div>
       <Link to="/">Home</Link> <Link to="/blog">Blog</Link>
       <Link to="/admin">Admin</Link>
+      <Link to="/signup">Sign Up</Link>
+      <Link to="/loginup">Log in</Link>
       <Routes>
         <Route path="/" element={<div>Home page</div>} />
         <Route path="/blog" element={<div>Blog list</div>} />

@@ -1,9 +1,8 @@
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
-import "./App.css";
 
-import { Editing } from "./editing";
-import Header from "./header";
+import { TodosNew } from "./TodosNew";
+import { TodoListItem } from "./TodoListItem";
 
 function Todos() {
   const [save, setSave] = useState([]);
@@ -30,11 +29,11 @@ function Todos() {
   }
   return (
     <>
-      <Editing onSave={handleSave} />
+      <TodosNew onSave={handleSave} />
       <div>
         {save.map((niitlel, index) => {
           return (
-            <Header
+            <TodoListItem
               key={niitlel.id}
               niitlel={niitlel}
               onUpdate={(text) => updateEditing(index, text)}

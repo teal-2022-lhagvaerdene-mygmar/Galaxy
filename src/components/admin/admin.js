@@ -2,10 +2,11 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Todos from "../todos";
-import { Link, Route, Routes } from "react-router-dom";
-import { Editing } from "../editing";
+import Todos from "./todos";
+import { Link, NavLink, Route, Routes } from "react-router-dom";
+
 import { Categories } from "./Categories";
+import { Articles } from "./Articles";
 
 export function Admin() {
   return (
@@ -14,9 +15,9 @@ export function Admin() {
       <div style={{ maxWidth: 700, margin: "2rem auto" }}>
         <Routes>
           <Route path="/" element={<div>Welcome to admin</div>} />
-          <Route path="/editing" element={<Editing />} />
           <Route path="/todos" element={<Todos />} />
           <Route path="/categories" element={<Categories />} />
+          <Route path="/articles" element={<Articles />} />
         </Routes>
       </div>
     </>
@@ -35,14 +36,17 @@ function AdminNavbar() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link to="/admin" as={Link}>
+            <Nav.Link to="/admin" as={NavLink}>
               Admin
             </Nav.Link>
-            <Nav.Link to="/admin/categories" as={Link}>
+            <Nav.Link to="/admin/categories" as={NavLink}>
               Categories
             </Nav.Link>
-            <Nav.Link to="/admin/todos" as={Link}>
-              Todos
+            <Nav.Link to="/admin/todos" as={NavLink}>
+              Todo
+            </Nav.Link>
+            <Nav.Link to="/admin/articles" as={NavLink}>
+              Articles
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
