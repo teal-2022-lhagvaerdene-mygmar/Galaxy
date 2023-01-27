@@ -1,0 +1,27 @@
+GET http://localhost:50000/categories 
+
+###
+
+GET http://localhost:50000/categories/id
+
+###
+
+POST http://localhost:50000/categories 
+content-type: application/json
+
+{
+    "name": "Entertainment"
+}
+
+
+###
+PUT http://localhost:50000/categories/175868ac-d8cf-4a7e-abbb-29320ea045f1
+content-type: application/json
+
+{
+    "name": "hi"
+}
+
+
+###
+DELETE  http://localhost:50000/categories/96b5970c-17c3-4c35-90ff-361ca3137c3b

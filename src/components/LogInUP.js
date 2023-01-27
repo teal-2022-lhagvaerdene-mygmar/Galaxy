@@ -5,8 +5,9 @@ import { Client } from "./client/client";
 function LogInUP() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  function Password() {}
-  function login() {}
+  function enterLogin() {
+    
+  }
   return (
     <>
       <Client />
@@ -33,7 +34,7 @@ function LogInUP() {
               height: 44,
               borderRadius: 10,
             }}
-            onClick={login}>
+            onClick={enterLogin}>
             Log in
           </button>
           <p style={{ fontSize: 14 }} className="text-center">
