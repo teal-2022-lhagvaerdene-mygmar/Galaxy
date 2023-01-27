@@ -14,23 +14,26 @@ export function Categories() {
 
   const [list, setList] = useState([]);
 
-  useEffect(() => {
-    // fetch("https://dummyjson.com/products")
-    //     .then((req) => req.json())
-    //     .then((data) => setList(data.products));
-
-    axios.get("https://dummyjson.com/products").then((res) => {
+  function loadCategories() {
+    axios.get("http://localhost:50000/categories").then((res) => {
       const { data, status } = res;
       if (status === 200) {
-        setList(data.products);
+        setList(data);
       } else {
         alert(`Aldaa garlaa: ${status}`);
       }
     });
+  }
+
+  useEffect(() => {
+    loadCategories();
   }, []);
 
   function closeModal() {
     setSearchParams({});
+  }
+  function handleComplete() {
+    loadCategories();
   }
 
   const editing = searchParams.get("editing") === "new";
@@ -47,7 +50,11 @@ export function Categories() {
       </div>
 
       <CategoriesList list={list} />
-      <CategoriesEdit show={editing} onClose={closeModal} />
+      <CategoriesEdit
+        show={editing}
+        onClose={closeModal}
+        onCompolete={handleComplete}
+      />
     </div>
   );
 }

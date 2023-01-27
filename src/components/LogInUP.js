@@ -1,7 +1,12 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Client } from "./client/client";
 
 function LogInUP() {
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  function Password() {}
+  function login() {}
   return (
     <>
       <Client />
@@ -27,7 +32,8 @@ function LogInUP() {
               width: 340,
               height: 44,
               borderRadius: 10,
-            }}>
+            }}
+            onClick={login}>
             Log in
           </button>
           <p style={{ fontSize: 14 }} className="text-center">
