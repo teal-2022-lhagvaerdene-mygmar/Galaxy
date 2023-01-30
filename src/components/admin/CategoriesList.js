@@ -31,7 +31,6 @@ function ListItem({ category, edit }) {
         });
     }
   }
-  function handleEdit() {}
 
   return (
     <Card key={category.id} className="mb-2">

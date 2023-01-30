@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Spinner from "react-bootstrap/Spinner";
 
-export function CategoriesEdit({ show, onClose, onComplete }) {
+export function CategoriesEdit({ show, onClose, onCompolete }) {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   function handleSave() {
@@ -17,9 +17,10 @@ export function CategoriesEdit({ show, onClose, onComplete }) {
       .then((res) => {
         const { status } = res;
         if (status === 201) {
-          onComplete();
+          onCompolete();
           onClose();
           setLoading(false);
+          setName("");
         }
       });
   }
