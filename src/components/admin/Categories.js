@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { useDebounce } from "use-debounce";
+
 import { CategoriesEdit } from "./categoriesEdit";
 import { CategoriesList } from "./CategoriesList";
 
@@ -11,21 +13,24 @@ axios.interceptors.request.use((config) => {
 
 export function Categories() {
   const [searchParams, setSearchParams] = useSearchParams({});
-
+  const [query, setQuery] = useState("");
   const [list, setList] = useState([]);
+  const [searchedQuery] = useDebounce(query, 1000);
 
   function loadCategories(query) {
-    axios
-      .get(`http://localhost:50000/categories?query=${query}`)
-      .then((res) => {
-        const { data, status } = res;
-        if (status === 200) {
-          setList(data);
-        } else {
-          alert(`Aldaa garlaa: ${status}`);
-        }
-      });
+    axios.get(`http://localhost:4321/categories?q=${query}`).then((res) => {
+      const { data, status } = res;
+      if (status === 200) {
+        setList(data);
+      } else {
+        alert(`Aldaa garlaa: ${status}`);
+      }
+    });
   }
+
+  useEffect(() => {
+    loadCategories(searchedQuery);
+  }, [searchedQuery]);
 
   useEffect(() => {
     loadCategories();
@@ -50,8 +55,13 @@ export function Categories() {
           Шинэ
         </button>
       </div>
-
-      <CategoriesList list={list} onChange={loadCategories} />
+      <input value={query} onChange={(e) => setQuery(e.target.value)} />
+      {/* <button onClick={() => loadCategories(query)}>Хайх</button> */}
+      <CategoriesList
+        list={list}
+        onChange={loadCategories}
+        searchedQuery={searchedQuery}
+      />
       <CategoriesEdit
         show={editing}
         onClose={closeModal}

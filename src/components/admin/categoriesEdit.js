@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Spinner from "react-bootstrap/Spinner";
@@ -10,7 +10,7 @@ export function CategoriesEdit({ show, onClose, onComplete, editingId }) {
 
   useEffect(() => {
     if (editingId) {
-      axios.get(`http://localhost:8000/categories/${editingId}`).then((res) => {
+      axios.get(`http://localhost:4321/categories/${editingId}`).then((res) => {
         const { data, status } = res;
         if (status === 200) {
           setName(data.name);
@@ -26,7 +26,7 @@ export function CategoriesEdit({ show, onClose, onComplete, editingId }) {
 
     if (editingId === "new") {
       axios
-        .post("http://localhost:8000/categories", {
+        .post("http://localhost:4321/categories", {
           name: name,
         })
         .then((res) => {
@@ -40,7 +40,7 @@ export function CategoriesEdit({ show, onClose, onComplete, editingId }) {
         });
     } else {
       axios
-        .put(`http://localhost:8000/categories/${editingId}`, {
+        .put(`http://localhost:4321/categories/${editingId}`, {
           name: name,
         })
         .then((res) => {
@@ -59,7 +59,7 @@ export function CategoriesEdit({ show, onClose, onComplete, editingId }) {
     <>
       <Modal show={show} onHide={onClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Modal heading {editingId}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <input
@@ -81,6 +81,7 @@ export function CategoriesEdit({ show, onClose, onComplete, editingId }) {
             Save Changes
           </Button>
         </Modal.Footer>
+
         {loading && (
           <Spinner animation="border" role="status">
             <span className="visually-hidden">Loading...</span>

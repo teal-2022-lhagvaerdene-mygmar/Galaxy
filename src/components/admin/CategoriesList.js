@@ -1,25 +1,35 @@
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import Highlighter from "react-highlight-words";
 import { useSearchParams } from "react-router-dom";
 
-export function CategoriesList({ list, onChange }) {
+export function CategoriesList({ list, onChange, searchedQuery }) {
+  if (list.length === 0) {
+    return <h1>Ийм үр дүн олдсонгүй</h1>;
+  }
+
   return (
     <>
       {list.map((item) => (
-        <ListItem key={item.id} category={item} onChange={onChange} />
+        <ListItem
+          searchedQuery={searchedQuery}
+          key={item.id}
+          category={item}
+          onChange={onChange}
+        />
       ))}
     </>
   );
 }
 
-function ListItem({ category, onChange }) {
+function ListItem({ category, onChange, searchedQuery }) {
   const [searchParams, setSearchParams] = useSearchParams({});
 
   function handleDelete() {
     if (window.confirm("Delete?")) {
       axios
-        .delete(`http://localhost:8000/categories/${category.id}`)
+        .delete(`http://localhost:4321/categories/${category.id}`)
         .then((res) => {
           const { status } = res;
           if (status === 200) {
@@ -33,7 +43,12 @@ function ListItem({ category, onChange }) {
     <Card key={category.id} className="mb-2">
       <Card.Body>
         <div className="d-flex justify-content-between align-items-center">
-          <div>{category.name}</div>
+          <Highlighter
+            highlightClassName="p-0 bg-warning"
+            searchWords={[searchedQuery]}
+            autoEscape={true}
+            textToHighlight={category.name}
+          />
 
           <div>
             <Button
