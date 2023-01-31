@@ -14,15 +14,17 @@ export function Categories() {
 
   const [list, setList] = useState([]);
 
-  function loadCategories() {
-    axios.get("http://localhost:50000/categories").then((res) => {
-      const { data, status } = res;
-      if (status === 200) {
-        setList(data);
-      } else {
-        alert(`Aldaa garlaa: ${status}`);
-      }
-    });
+  function loadCategories(query) {
+    axios
+      .get(`http://localhost:50000/categories?query=${query}`)
+      .then((res) => {
+        const { data, status } = res;
+        if (status === 200) {
+          setList(data);
+        } else {
+          alert(`Aldaa garlaa: ${status}`);
+        }
+      });
   }
 
   useEffect(() => {
@@ -36,7 +38,7 @@ export function Categories() {
     loadCategories();
   }
 
-  const editing = searchParams.get("editing") === "new";
+  const editing = searchParams.get("editing");
 
   return (
     <div>
@@ -49,11 +51,12 @@ export function Categories() {
         </button>
       </div>
 
-      <CategoriesList list={list} />
+      <CategoriesList list={list} onChange={loadCategories} />
       <CategoriesEdit
         show={editing}
         onClose={closeModal}
-        onCompolete={handleComplete}
+        onComplete={handleComplete}
+        editingId={editing}
       />
     </div>
   );
