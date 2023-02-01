@@ -6,7 +6,7 @@ import { useSearchParams } from "react-router-dom";
 
 export function CategoriesList({ list, onChange, searchedQuery }) {
   if (list.length === 0) {
-    return <h1>Ийм үр дүн олдсонгүй</h1>;
+    return <h3>Ийм үр дүн олдсонгүй</h3>;
   }
 
   return (

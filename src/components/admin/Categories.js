@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useDebounce } from "use-debounce";
-
 import { CategoriesEdit } from "./categoriesEdit";
 import { CategoriesList } from "./CategoriesList";
 
@@ -16,8 +15,7 @@ export function Categories() {
   const [query, setQuery] = useState("");
   const [list, setList] = useState([]);
   const [searchedQuery] = useDebounce(query, 1000);
-
-  function loadCategories(query) {
+  function loadCategories(query = "") {
     axios.get(`http://localhost:4321/categories?q=${query}`).then((res) => {
       const { data, status } = res;
       if (status === 200) {

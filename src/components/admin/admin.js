@@ -7,6 +7,7 @@ import { Link, NavLink, Route, Routes } from "react-router-dom";
 
 import { Categories } from "./Categories";
 import { Articles } from "./Articles";
+import { ArticlesNew } from "./ArticlesNew";
 
 export function Admin() {
   return (
@@ -18,6 +19,7 @@ export function Admin() {
           <Route path="/todos" element={<Todos />} />
           <Route path="/categories" element={<Categories />} />
           <Route path="/articles" element={<Articles />} />
+          <Route path="/articles/new" element={<ArticlesNew />} />
         </Routes>
       </div>
     </>
