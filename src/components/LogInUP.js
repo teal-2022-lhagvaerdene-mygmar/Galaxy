@@ -1,13 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Client } from "./client/client";
-
+import axios from "axios";
 function LogInUP() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  function enterLogin() {
-    
+  const [admin, setAdmin] = useState("");
+  useEffect(() => {
+    axios.get(`http://localhost:4321/admin`).then((res) => {
+      const { data, status } = res;
+      if (status === 200) {
+        setAdmin(data);
+        console.log(data);
+      } else {
+        alert(`Aldaa garlaa: ${status}`);
+      }
+    });
+  }, []);
+  console.log(admin.email);
+  function logInEnter() {
+    if (email === admin.email && password === admin.password) {
+      window.location = "/admin";
+    } else {
+      alert("jjj");
+      setEmail("");
+      setPassword("");
+    }
   }
+
   return (
     <>
       <Client />
@@ -19,11 +39,15 @@ function LogInUP() {
           <input
             placeholder="Enter your email"
             style={{ width: 340, height: 44 }}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <h6 className="my-3">Password*</h6>
           <input
             placeholder="Your password"
             style={{ width: 340, height: 44 }}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <p>Must be at least 8 characters.</p>
           <button
@@ -34,7 +58,7 @@ function LogInUP() {
               height: 44,
               borderRadius: 10,
             }}
-            onClick={enterLogin}>
+            onClick={logInEnter}>
             Log in
           </button>
           <p style={{ fontSize: 14 }} className="text-center">
