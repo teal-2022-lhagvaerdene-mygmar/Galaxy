@@ -20,7 +20,7 @@ export function Client() {
 function SingleBlog() {
   const { id } = useParams();
   const [article, setArticle] = useState();
-
+  // const [category, setCategory] = useState();
   useEffect(() => {
     axios.get(`http://localhost:4321/articles/${id}`).then((res) => {
       const { data, status } = res;
@@ -32,10 +32,30 @@ function SingleBlog() {
     });
   }, []);
 
+  // useEffect(() => {
+  //   if (article) {
+  //     axios
+  //       .get(`http://localhost:4321/categories/${article.categoryId}`)
+  //       .then((res) => {
+  //         const { data, status } = res;
+  //         if (status === 200) {
+  //           setCategory(data);
+  //         } else {
+  //           alert(`Aldaa garlaa: ${status}`);
+  //         }
+  //       });
+  //   }
+  // }, [article]);
+
   if (!article) return <div>Loading...</div>;
 
   return (
     <div className="container" style={{ maxWidth: 700 }}>
+      {/* {category && <span>{category.name}</span>} */}
+      <span className="badge rounded-pill text-bg-primary">
+        {article.category?.name}
+      </span>
+
       <h1 className="mb-4">{article.title}</h1>
 
       <div className="content">{parse(article.text)}</div>

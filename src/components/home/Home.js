@@ -31,7 +31,7 @@ function HomeNavbar() {
             <Nav.Link to="/signup" as={NavLink}>
               Sign Up
             </Nav.Link>
-            <Nav.Link to="/loginup" as={NavLink}>
+            <Nav.Link to="/loginup/*" as={NavLink}>
               Log In
             </Nav.Link>
           </Nav>

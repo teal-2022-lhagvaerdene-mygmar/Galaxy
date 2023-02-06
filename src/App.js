@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path="/admin/*" element={<Admin />} />
         <Route path="*" element={<Client />} />
-        <Route path="/signup/*" element={<SignUp />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/loginup/*" element={<LogInUP />} />
       </Routes>
       <ToastContainer position="top-right" />

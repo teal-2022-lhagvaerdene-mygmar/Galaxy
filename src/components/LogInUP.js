@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Client } from "./client/client";
 import axios from "axios";
 function LogInUP() {
   const [password, setPassword] = useState("");
@@ -11,16 +10,17 @@ function LogInUP() {
       const { data, status } = res;
       if (status === 200) {
         setAdmin(data);
-        console.log(data);
       } else {
         alert(`Aldaa garlaa: ${status}`);
       }
     });
   }, []);
-  console.log(admin.email);
+  // console.log((window.location = "/admin/*"));
   function logInEnter() {
     if (email === admin.email && password === admin.password) {
-      window.location = "/admin";
+      console.log(email);
+      console.log(password);
+      window.location = "/admin/*";
     } else {
       alert("jjj");
       setEmail("");
@@ -30,7 +30,6 @@ function LogInUP() {
 
   return (
     <>
-      <Client />
       <div className="align-items-center position-absolute top-50 start-50 translate-middle">
         <h1>Log in</h1>
 
@@ -52,7 +51,7 @@ function LogInUP() {
           <p>Must be at least 8 characters.</p>
           <button
             style={{
-              backgroundColor: " #7F56D9",
+              backgroundColor: "#7F56D9",
               color: "white",
               width: 340,
               height: 44,
