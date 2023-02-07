@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { Client } from "./client/client";
 function LogInUP() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -30,6 +31,7 @@ function LogInUP() {
 
   return (
     <>
+      <Client />
       <div className="align-items-center position-absolute top-50 start-50 translate-middle">
         <h1>Log in</h1>
 

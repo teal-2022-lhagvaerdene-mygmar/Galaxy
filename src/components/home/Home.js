@@ -28,7 +28,7 @@ function HomeNavbar() {
             <Nav.Link to="/news" as={NavLink}>
               News
             </Nav.Link>
-            <Nav.Link to="/signup" as={NavLink}>
+            <Nav.Link to="/signup/*" as={NavLink}>
               Sign Up
             </Nav.Link>
             <Nav.Link to="/loginup/*" as={NavLink}>

@@ -1,9 +1,8 @@
 import axios from "axios";
 import parse from "html-react-parser";
 import { useEffect, useState } from "react";
-import { Link, Route, Routes, useParams } from "react-router-dom";
+import { Route, Routes, useParams } from "react-router-dom";
 import { Home } from "../home/Home";
-import { News } from "../home/news";
 
 export function Client() {
   return (
@@ -20,7 +19,6 @@ export function Client() {
 function SingleBlog() {
   const { id } = useParams();
   const [article, setArticle] = useState();
-  // const [category, setCategory] = useState();
   useEffect(() => {
     axios.get(`http://localhost:4321/articles/${id}`).then((res) => {
       const { data, status } = res;

@@ -8,6 +8,8 @@ import { Link, NavLink, Route, Routes } from "react-router-dom";
 import { Categories } from "./Categories";
 import { Articles } from "./Articles";
 import { ArticlesNew } from "./ArticlesNew";
+import { useContext } from "react";
+import { UserContext } from "../../App";
 
 export function Admin() {
   return (
@@ -27,6 +29,8 @@ export function Admin() {
 }
 
 function AdminNavbar() {
+  const userName = useContext(UserContext);
+
   return (
     <Navbar expand="lg" bg="dark" variant="dark">
       <Container>
@@ -49,6 +53,9 @@ function AdminNavbar() {
             </Nav.Link>
             <Nav.Link to="/admin/articles" as={NavLink}>
               Articles
+            </Nav.Link>
+            <Nav.Link to="" as={NavLink}>
+              <strong>{userName.name}</strong>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
