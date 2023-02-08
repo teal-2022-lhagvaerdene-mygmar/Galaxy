@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Spinner from "react-bootstrap/Spinner";
@@ -7,6 +7,7 @@ import Spinner from "react-bootstrap/Spinner";
 export function CategoriesEdit({ show, onClose, onComplete, editingId }) {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
+  const [date, setDate] = useState("");
 
   useEffect(() => {
     if (editingId) {
@@ -54,15 +55,34 @@ export function CategoriesEdit({ show, onClose, onComplete, editingId }) {
         });
     }
   }
+  const inputEl = useRef();
+  const myInterval = useRef();
+  useEffect(() => {
+    if (show) {
+      inputEl.current.focus();
+
+      myInterval.current = setInterval(() => {
+        setDate(new Date().toISOString());
+        console.log("Inside interval", new Date());
+      }, 1000);
+    }
+  }, [show]);
+  useEffect(() => {
+    if (!show) {
+      clearInterval(myInterval.current);
+    }
+  }, [show]);
 
   return (
     <>
       <Modal show={show} onHide={onClose}>
+        {date}
         <Modal.Header closeButton>
           <Modal.Title>Modal heading {editingId}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <input
+            ref={inputEl}
             disabled={loading}
             className="form-control"
             value={name}

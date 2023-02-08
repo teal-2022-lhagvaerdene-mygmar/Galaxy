@@ -22,7 +22,7 @@ function HomeNavbar() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link to="/blog" as={NavLink}>
+            <Nav.Link to="/blog/*" as={NavLink}>
               Blog
             </Nav.Link>
             <Nav.Link to="/news" as={NavLink}>
