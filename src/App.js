@@ -4,10 +4,10 @@ import "./header.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Admin } from "./components/admin/admin";
 import { ToastContainer } from "react-toastify";
-import { Client } from "./components/client/client";
 import { SignUp } from "./components/SignUp";
 import LogInUP from "./components/LogInUP";
 import { createContext } from "react";
+import { Home } from "./components/home/Home";
 
 export const UserContext = createContext("guest");
 function App() {
@@ -22,7 +22,7 @@ function App() {
             </UserContext.Provider>
           }
         />
-        <Route path="*" element={<Client />} />
+        <Route path="*" element={<Home />} />
         <Route path="/signup/*" element={<SignUp />} />
         <Route path="/loginup/*" element={<LogInUP />} />
       </Routes>

@@ -17,13 +17,13 @@ export function Blog() {
   }, []);
 
   if (!blog) {
-    return <div>Loading</div>;
+    return <div>Loading ...</div>;
   }
   return (
-    <Container>
+    <Container style={{ maxWidth: 1100 }}>
       {blog.map((blogList) => {
         return (
-          <div key={blogList.id} style={{ maxWidth: 700 }}>
+          <div key={blogList.id}>
             <h1>{blogList.title}</h1>
           </div>
         );
