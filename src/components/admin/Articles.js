@@ -1,71 +1,83 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import axios from "axios";
 
 export function Articles() {
   const [list, setList] = useState([]);
-  function loadArticles(query = "") {
-    axios.get(`http://localhost:4321/articles?q=${query}`).then((res) => {
-      const { data, status } = res;
-      if (status === 200) {
-        setList(data);
-      } else {
-        alert(`Aldaa garlaa: ${status}`);
-      }
-    });
+
+  const [searchParams] = useSearchParams();
+  const [pages, setPages] = useState();
+  const page = searchParams.get("page") ? Number(searchParams.get("page")) : 1;
+
+  function loadArticles(page, query = "") {
+    axios
+      .get(`http://localhost:4321/articles?q=${query}&page=${page}`)
+      .then((res) => {
+        const { data, status } = res;
+        if (status === 200) {
+          const { list, count } = data;
+          setList(list);
+          setPages(Math.ceil(count / 10));
+        } else {
+          alert(`Aldaa garlaa: ${status}`);
+        }
+      });
   }
 
   useEffect(() => {
-    loadArticles();
-  }, []);
+    loadArticles(page, "");
+  }, [page]);
 
   return (
     <>
-      <Link to={"/admin/articles/new"} className="btn btn-primary">
-        New news
+      <Link to="/admin/articles/new" className="btn btn-primary">
+        Шинэ мэдээ
       </Link>
+
       <table className="table table-bordered table-striped">
         <thead>
           <tr>
             <th>Гарчиг</th>
+            <th>Ангилал</th>
           </tr>
         </thead>
         <tbody>
           {list.map((article) => (
             <tr key={article.id}>
               <td>{article.title}</td>
+              <td>{article.id}</td>
             </tr>
           ))}
         </tbody>
       </table>
 
       <nav aria-label="Page navigation example">
-        <ul class="pagination">
-          <li class="page-item">
-            <a class="page-link" href="#">
-              Previous
-            </a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">
-              1
-            </a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">
-              2
-            </a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">
-              3
-            </a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">
-              Next
-            </a>
-          </li>
+        <ul class="pagination" style={{ flexWrap: "wrap" }}>
+          {page !== 1 && (
+            <li class="page-item">
+              <Link to={`?page=${page - 1}`} class="page-link">
+                Өмнөх
+              </Link>
+            </li>
+          )}
+
+          {[...Array(pages)].map((_, index) => (
+            <li
+              key={index}
+              class={`page-item ${page === index + 1 ? "active" : ""}`}>
+              <Link to={`?page=${index + 1}`} class="page-link">
+                {index + 1}
+              </Link>
+            </li>
+          ))}
+
+          {page !== pages && (
+            <li class="page-item">
+              <Link to={`?page=${page + 1}`} class="page-link">
+                Дараах
+              </Link>
+            </li>
+          )}
         </ul>
       </nav>
     </>
