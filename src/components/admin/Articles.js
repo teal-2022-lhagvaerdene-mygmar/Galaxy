@@ -1,33 +1,24 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import axios from "axios";
+import { useArticles } from "./useArticles";
 
 export function Articles() {
-  const [list, setList] = useState([]);
-
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [pages, setPages] = useState();
+  const [categoryId, setCategoryId] = useState("");
   const page = searchParams.get("page") ? Number(searchParams.get("page")) : 1;
-
-  function loadArticles(page, query = "") {
-    axios
-      .get(`http://localhost:4321/articles?q=${query}&page=${page}`)
-      .then((res) => {
-        const { data, status } = res;
-        if (status === 200) {
-          const { list, count } = data;
-          setList(list);
-          setPages(Math.ceil(count / 10));
-        } else {
-          alert(`Aldaa garlaa: ${status}`);
-        }
-      });
-  }
+  const { list, count } = useArticles(page, "", categoryId);
+  useEffect(() => {
+    if (count) {
+      setPages(Math.ceil(count / 10));
+    }
+  }, [count]);
 
   useEffect(() => {
-    loadArticles(page, "");
-  }, [page]);
+    setSearchParams({ page: 1 });
+  }, [categoryId]);
 
+  console.log({ page, pages, count });
   return (
     <>
       <Link to="/admin/articles/new" className="btn btn-primary">
@@ -45,17 +36,17 @@ export function Articles() {
           {list.map((article) => (
             <tr key={article.id}>
               <td>{article.title}</td>
-              <td>{article.id}</td>
+              <td>{article.category?.name}</td>
             </tr>
           ))}
         </tbody>
       </table>
 
       <nav aria-label="Page navigation example">
-        <ul class="pagination" style={{ flexWrap: "wrap" }}>
+        <ul className="pagination" style={{ flexWrap: "wrap" }}>
           {page !== 1 && (
-            <li class="page-item">
-              <Link to={`?page=${page - 1}`} class="page-link">
+            <li className="page-item">
+              <Link to={`?page=${page - 1}`} className="page-link">
                 Өмнөх
               </Link>
             </li>
@@ -64,16 +55,16 @@ export function Articles() {
           {[...Array(pages)].map((_, index) => (
             <li
               key={index}
-              class={`page-item ${page === index + 1 ? "active" : ""}`}>
-              <Link to={`?page=${index + 1}`} class="page-link">
+              className={`page-item ${page === index + 1 ? "active" : ""}`}>
+              <Link to={`?page=${index + 1}`} className="page-link">
                 {index + 1}
               </Link>
             </li>
           ))}
 
           {page !== pages && (
-            <li class="page-item">
-              <Link to={`?page=${page + 1}`} class="page-link">
+            <li className="page-item">
+              <Link to={`?page=${page + 1}`} className="page-link">
                 Дараах
               </Link>
             </li>

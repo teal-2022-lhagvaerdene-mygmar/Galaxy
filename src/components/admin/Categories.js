@@ -17,9 +17,9 @@ export function Categories() {
   const [query, setQuery] = useState("");
   const [searchedQuery] = useDebounce(query, 1000);
   const categories = useCategories();
-  const articles = useFetch("http://localhost:4321/articles?page=1");
+  // const articles = useFetch("http://localhost:4321/articles?page=1");
 
-  console.log({ articles });
+  // console.log({ articles });
 
   function closeModal() {
     setSearchParams({});
