@@ -23,8 +23,6 @@ function App() {
           }
         />
         <Route path="*" element={<Home />} />
-        <Route path="/signup/*" element={<SignUp />} />
-        <Route path="/loginup/*" element={<LogInUP />} />
       </Routes>
       <ToastContainer position="top-right" />
     </BrowserRouter>

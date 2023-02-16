@@ -8,10 +8,62 @@ import { Link, NavLink, Route, Routes } from "react-router-dom";
 import { Categories } from "./Categories";
 import { Articles } from "./Articles";
 import { ArticlesNew } from "./ArticlesNew";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../App";
+import axios from "axios";
+
+function Login() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  function handleLogin() {
+    axios
+      .get(
+        `http://localhost:4321/login?username=${username}&password=${password}`,
+      )
+      .then((res) => {
+        const { data, status } = res;
+        if (status === 200) {
+          const { token } = data;
+          localStorage.setItem("loginToken", token);
+          window.location.reload();
+        }
+      })
+      .catch(({ response, code }) => {
+        if (response.status === 401) {
+          alert("Нууц үг эсвэл нэр буруу байна");
+        } else {
+          alert(code);
+        }
+      });
+  }
+
+  return (
+    <div style={{ width: 200, margin: "2em auto" }}>
+      <input
+        className="form-control"
+        placeholder="Хэрэглэгчийн нэр"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <input
+        type="password"
+        className="form-control"
+        placeholder="Нууц үг"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button className="btn btn-primary" onClick={handleLogin}>
+        Нэвтрэх
+      </button>
+    </div>
+  );
+}
 
 export function Admin() {
+  if (!localStorage.getItem("loginToken")) {
+    return <Login />;
+  }
   return (
     <>
       <AdminNavbar />
@@ -30,6 +82,12 @@ export function Admin() {
 
 function AdminNavbar() {
   const userName = useContext(UserContext);
+
+  function logout() {
+    window.confirm("гарах уу");
+    localStorage.removeItem("loginToken");
+    window.location.reload();
+  }
 
   return (
     <Navbar expand="lg" bg="dark" variant="dark">
@@ -59,6 +117,7 @@ function AdminNavbar() {
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
+        <button onClick={logout}>Гарах</button>
       </Container>
     </Navbar>
   );
