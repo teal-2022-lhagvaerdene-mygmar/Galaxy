@@ -55,23 +55,6 @@ export function CategoriesEdit({ show, onClose, onComplete, editingId }) {
         });
     }
   }
-  const inputEl = useRef();
-  const myInterval = useRef();
-  useEffect(() => {
-    if (show) {
-      inputEl.current.focus();
-
-      myInterval.current = setInterval(() => {
-        setDate(new Date().toISOString());
-        console.log("Inside interval", new Date());
-      }, 1000);
-    }
-  }, [show]);
-  useEffect(() => {
-    if (!show) {
-      clearInterval(myInterval.current);
-    }
-  }, [show]);
 
   return (
     <>
@@ -82,7 +65,6 @@ export function CategoriesEdit({ show, onClose, onComplete, editingId }) {
         </Modal.Header>
         <Modal.Body>
           <input
-            ref={inputEl}
             disabled={loading}
             className="form-control"
             value={name}

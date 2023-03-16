@@ -5,7 +5,6 @@ import { useDebounce } from "use-debounce";
 import { CategoriesEdit } from "./categoriesEdit";
 import { CategoriesList } from "./CategoriesList";
 import { useCategories } from "./useCategories";
-import { useFetch } from "./useFetch";
 
 axios.interceptors.request.use((config) => {
   console.log("Request sent to: ", config.url);
@@ -16,7 +15,7 @@ export function Categories() {
   const [searchParams, setSearchParams] = useSearchParams({});
   const [query, setQuery] = useState("");
   const [searchedQuery] = useDebounce(query, 1000);
-  const categories = useCategories();
+  const categories = useCategories(searchedQuery);
   // const articles = useFetch("http://localhost:4321/articles?page=1");
 
   // console.log({ articles });
@@ -41,8 +40,21 @@ export function Categories() {
       <input value={query} onChange={(e) => setQuery(e.target.value)} />
       {/* <button onClick={() => loadCategories(query)}>Хайх</button> */}
 
-      <CategoriesList searchedQuery={searchedQuery} list={categories} />
-      <CategoriesEdit show={editing} editingId={editing} onClose={closeModal} />
+      <CategoriesList
+        searchedQuery={searchedQuery}
+        list={categories}
+        onComplete={() => {
+          window.location = "/admin/categories";
+        }}
+      />
+      <CategoriesEdit
+        show={editing}
+        editingId={editing}
+        onClose={closeModal}
+        onComplete={() => {
+          window.location = "/admin/categories";
+        }}
+      />
     </div>
   );
 }
