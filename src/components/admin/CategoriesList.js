@@ -4,7 +4,7 @@ import Card from "react-bootstrap/Card";
 import Highlighter from "react-highlight-words";
 import { useSearchParams } from "react-router-dom";
 
-export function CategoriesList({ list, onChange, searchedQuery }) {
+export function CategoriesList({ list, onChange, searchedQuery, onComplete }) {
   if (list.length === 0) {
     return <h3>Ийм үр дүн олдсонгүй</h3>;
   }
@@ -17,13 +17,14 @@ export function CategoriesList({ list, onChange, searchedQuery }) {
           key={item.id}
           category={item}
           onChange={onChange}
+          onComplete={onComplete}
         />
       ))}
     </>
   );
 }
 
-function ListItem({ category, onChange, searchedQuery }) {
+function ListItem({ category, onChange, searchedQuery, onComplete }) {
   const [searchParams, setSearchParams] = useSearchParams({});
 
   function handleDelete() {
@@ -33,6 +34,7 @@ function ListItem({ category, onChange, searchedQuery }) {
         .then((res) => {
           const { status } = res;
           if (status === 200) {
+            onComplete();
             onChange();
           }
         });

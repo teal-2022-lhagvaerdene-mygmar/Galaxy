@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export function useArticles(page, query, categoryId) {
+export function useArticles(page, size, query, categoryId) {
   const [list, setList] = useState([]);
   const [count, setCount] = useState();
 
   function loadArticles() {
     axios
       .get(
-        `http://localhost:4321/articles?q=${query}&page=${page}&categoryId=${categoryId}`,
+        `http://localhost:4321/articles?q=${query}&page=${page}&size=${size}&categoryId=${categoryId}`,
       )
       .then((res) => {
         const { data, status } = res;

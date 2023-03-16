@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { CategoriesSelector } from "./CategoriesSelector";
 import { useArticles } from "./useArticles";
+
+const size = 50;
 
 export function Articles() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [pages, setPages] = useState();
   const [categoryId, setCategoryId] = useState("");
   const page = searchParams.get("page") ? Number(searchParams.get("page")) : 1;
-  const { list, count } = useArticles(page, "", categoryId);
+  const { list, count } = useArticles(page, size, "", categoryId);
   useEffect(() => {
     if (count) {
-      setPages(Math.ceil(count / 10));
+      setPages(Math.ceil(count / size));
     }
   }, [count]);
 
@@ -24,7 +27,10 @@ export function Articles() {
       <Link to="/admin/articles/new" className="btn btn-primary">
         Шинэ мэдээ
       </Link>
-
+      <CategoriesSelector
+        value={categoryId}
+        onChange={(val) => setCategoryId(val)}
+      />
       <table className="table table-bordered table-striped">
         <thead>
           <tr>
@@ -36,7 +42,7 @@ export function Articles() {
           {list.map((article) => (
             <tr key={article.id}>
               <td>{article.title}</td>
-              <td>{article.category?.name}</td>
+              <td>{article.categoryName}</td>
             </tr>
           ))}
         </tbody>

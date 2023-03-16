@@ -3,7 +3,7 @@ import axios from "axios";
 export function useArticleMutations() {
   function createArticle({ title, categoryId, text }) {
     axios
-      .post("http://localhost:8000/articles", {
+      .post("http://localhost:4321/articles", {
         title, // title: title,
         categoryId, //  categoryId: categoryId,
         text, // text: text,
