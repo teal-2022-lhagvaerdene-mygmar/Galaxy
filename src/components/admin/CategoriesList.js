@@ -30,7 +30,7 @@ function ListItem({ category, onChange, searchedQuery, onComplete }) {
   function handleDelete() {
     if (window.confirm("Delete?")) {
       axios
-        .delete(`http://localhost:4321/categories/${category.id}`)
+        .delete(`http://localhost:4321/categories/${category._id}`)
         .then((res) => {
           const { status } = res;
           if (status === 200) {
@@ -55,7 +55,7 @@ function ListItem({ category, onChange, searchedQuery, onComplete }) {
           <div>
             <Button
               variant="outline-primary"
-              onClick={() => setSearchParams({ editing: category.id })}>
+              onClick={() => setSearchParams({ editing: category._id })}>
               Засах
             </Button>{" "}
             <Button variant="outline-danger" onClick={handleDelete}>
