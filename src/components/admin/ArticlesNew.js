@@ -8,8 +8,25 @@ export function ArticlesNew() {
   const [text, setText] = useState();
   const [title, setTitle] = useState("");
   const [categoryId, setCategoryId] = useState("");
-
   const { createArticle } = useArticleMutations();
+  const [image, setImage] = useState("");
+
+  async function handleFileUpload(event) {
+    const imageFile = event.target.files[0];
+
+    const formData = new FormData();
+    formData.append("image", imageFile);
+
+    await fetch("http://localhost:4321/upload-image", {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        setImage(data.file);
+      });
+  }
 
   return (
     <>
@@ -36,15 +53,10 @@ export function ArticlesNew() {
           // console.log({ event, editor, data });
         }}
       />
-      <form
-        action="http://localhost:4321/upload-image"
-        method="post"
-        enctype="multipart/form-data"
-        style={{ margin: "2em" }}>
-        <input type="file" name="image" />
-        <button type="submit">Submit</button>
-      </form>
-      <button onClick={() => createArticle({ title, categoryId, text })}>
+      <div>
+        <input type="file" name="image" onChange={handleFileUpload} />
+      </div>
+      <button onClick={() => createArticle({ title, categoryId, text, image })}>
         Хадгалах
       </button>
 

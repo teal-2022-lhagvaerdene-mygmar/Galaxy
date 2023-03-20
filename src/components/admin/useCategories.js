@@ -6,16 +6,14 @@ export function useCategories(searchedQuery) {
 
   function loadCategories(query = "") {
     const token = localStorage.getItem("loginToken");
-    axios
-      .get(`http://localhost:4321/categories?q=${query}&token=${token}`)
-      .then((res) => {
-        const { data, status } = res;
-        if (status === 200) {
-          setList(data);
-        } else {
-          alert(`Aldaa garlaa: ${status}`);
-        }
-      });
+    axios.get(`http://localhost:4321/categories?q=${query}`).then((res) => {
+      const { data, status } = res;
+      if (status === 200) {
+        setList(data);
+      } else {
+        alert(`Aldaa garlaa: ${status}`);
+      }
+    });
   }
 
   useEffect(() => {

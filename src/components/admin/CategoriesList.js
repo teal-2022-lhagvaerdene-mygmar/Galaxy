@@ -42,7 +42,7 @@ function ListItem({ category, onChange, searchedQuery, onComplete }) {
   }
 
   return (
-    <Card key={category.id} className="mb-2">
+    <Card key={category._id} className="mb-2">
       <Card.Body>
         <div className="d-flex justify-content-between align-items-center">
           <Highlighter
