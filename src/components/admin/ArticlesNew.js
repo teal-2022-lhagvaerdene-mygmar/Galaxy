@@ -9,9 +9,11 @@ export function ArticlesNew() {
   const [title, setTitle] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const { createArticle } = useArticleMutations();
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
+  const [uploading, setUploading] = useState(false);
 
   async function handleFileUpload(event) {
+    setUploading(true);
     const imageFile = event.target.files[0];
 
     const formData = new FormData();
@@ -23,8 +25,8 @@ export function ArticlesNew() {
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
-        setImage(data.file);
+        setImage(data);
+        setUploading(false);
       });
   }
 
@@ -55,6 +57,9 @@ export function ArticlesNew() {
       />
       <div>
         <input type="file" name="image" onChange={handleFileUpload} />
+        {uploading && <div class="spinner-border" role="status"></div>}
+
+        {image && <img src={image.path} width="100" alt="" />}
       </div>
       <button onClick={() => createArticle({ title, categoryId, text, image })}>
         Хадгалах
