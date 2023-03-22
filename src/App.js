@@ -4,12 +4,13 @@ import "./header.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Admin } from "./components/admin/admin";
 import { ToastContainer } from "react-toastify";
-import { SignUp } from "./components/SignUp";
-import LogInUP from "./components/LogInUP";
 import { createContext } from "react";
-import { Home } from "./components/home/Home";
-
+import { Client } from "./components/client/client";
+import axios from "axios";
 export const UserContext = createContext("guest");
+axios.defaults.headers.common["Authorization"] = `${localStorage.getItem(
+  "loginToken",
+)}`;
 function App() {
   return (
     <BrowserRouter>
@@ -22,7 +23,7 @@ function App() {
             </UserContext.Provider>
           }
         />
-        <Route path="*" element={<Home />} />
+        <Route path="*" element={<Client />} />
       </Routes>
       <ToastContainer position="top-right" />
     </BrowserRouter>

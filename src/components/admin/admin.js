@@ -4,13 +4,60 @@ import Navbar from "react-bootstrap/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Todos from "./todos";
 import { Link, NavLink, Route, Routes } from "react-router-dom";
-
+import axios from "axios";
 import { Categories } from "./Categories";
 import { Articles } from "./Articles";
 import { ArticlesNew } from "./ArticlesNew";
 import { useContext, useState } from "react";
 import { UserContext } from "../../App";
 
+function Login() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  function handleLogin() {
+    axios
+      .post(`http://localhost:4321/users/login`, {
+        username,
+        password,
+      })
+      .then((res) => {
+        const { data, status } = res;
+        if (status === 200) {
+          const { token } = data;
+          localStorage.setItem("loginToken", token);
+          window.location.reload();
+        }
+      })
+      .catch(({ response, code }) => {
+        // if (response.status === 401) {
+        //     alert("Нууц үг эсвэл нэр буруу байна");
+        // } else {
+        //     alert(code);
+        // }
+      });
+  }
+  return (
+    <div style={{ width: 200, margin: "2em auto" }}>
+      <input
+        className="form-control"
+        placeholder="Хэрэглэгчийн нэр"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <input
+        type="password"
+        className="form-control"
+        placeholder="Нууц үг"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button className="btn btn-primary" onClick={handleLogin}>
+        Нэвтрэх
+      </button>
+    </div>
+  );
+}
 export function Admin() {
   return (
     <>
@@ -30,7 +77,9 @@ export function Admin() {
 
 function AdminNavbar() {
   const userName = useContext(UserContext);
-
+  if (!localStorage.getItem("loginToken")) {
+    return <Login />;
+  }
   function logout() {
     window.confirm("гарах уу");
     localStorage.removeItem("loginToken");

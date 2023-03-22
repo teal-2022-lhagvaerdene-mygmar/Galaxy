@@ -1,16 +1,19 @@
 import axios from "axios";
 import parse from "html-react-parser";
 import { useEffect, useState } from "react";
-import { Route, Routes, useParams } from "react-router-dom";
+import { Link, Route, Routes, useParams } from "react-router-dom";
 import { Blog } from "../Blog";
-import { Home } from "../home/Home";
+
+import { Register } from "../Register";
 
 export function Client() {
   return (
     <div>
+      <Link to="/">Home</Link> <Link to="/blog">Blog</Link>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<div>Home page</div>} />
         <Route path="/blog/*" element={<Blog />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/blog/:id" element={<SingleBlog />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
