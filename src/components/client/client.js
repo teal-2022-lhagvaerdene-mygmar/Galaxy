@@ -50,21 +50,22 @@ function SingleBlog() {
   // }, [article]);
 
   if (!article) return <div>Loading...</div>;
+  else {
+    return (
+      <div className="container" style={{ maxWidth: 700 }}>
+        {/* {category && <span>{category.name}</span>} */}
+        {/* <span className="badge rounded-pill text-bg-primary">
+        {/* {article.category?.name} */}
+        {/* </span> */}
 
-  return (
-    <div className="container" style={{ maxWidth: 700 }}>
-      {/* {category && <span>{category.name}</span>} */}
-      <span className="badge rounded-pill text-bg-primary">
-        {article.category?.name}
-      </span>
+        <h1 className="mb-4">{article.title}</h1>
+        <img src={article.image.path} />
 
-      <h1 className="mb-4">{article.title}</h1>
-
-      <div className="content">{parse(article.text)}</div>
-    </div>
-  );
+        {/* <div className="content">{parse(article.text)}</div> */}
+      </div>
+    );
+  }
 }
-
 function NotFound() {
   return <div>Not Found</div>;
 }
