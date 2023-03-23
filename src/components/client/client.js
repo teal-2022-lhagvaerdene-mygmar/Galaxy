@@ -24,7 +24,7 @@ function SingleBlog() {
   const { id } = useParams();
   const [article, setArticle] = useState();
   useEffect(() => {
-    axios.get(`http://localhost:4321/articles/${id}`).then((res) => {
+    axios.get(`${process.env.REACT_APP_API_URL}/articles/${id}`).then((res) => {
       const { data, status } = res;
       if (status === 200) {
         setArticle(data);

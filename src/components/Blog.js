@@ -5,7 +5,7 @@ import axios from "axios";
 export function Blog() {
   const [blog, setBlog] = useState();
   useEffect(() => {
-    axios.get("http://localhost:4321/articles").then((res) => {
+    axios.get(`${process.env.REACT_APP_API_URL}/articles`).then((res) => {
       const { data, status } = res;
       console.log("hh");
       if (status === 200) {
