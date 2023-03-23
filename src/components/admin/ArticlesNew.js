@@ -19,7 +19,7 @@ export function ArticlesNew() {
     const formData = new FormData();
     formData.append("image", imageFile);
 
-    await fetch("http://localhost:4321/upload-image", {
+    await fetch(`${process.env.REACT_APP_API_URL}/upload-image`, {
       method: "POST",
       body: formData,
     })
